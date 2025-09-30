@@ -71,7 +71,7 @@ public class UserPrincipal implements UserDetails {
      * */
     @Builder // 빌더 패턴 적용
     private UserPrincipal( // @Builder 사용 시 생성자는 private으로 제한
-            Long id, // PK
+            Long id, // PK@
             String username, // 로그인 아이디
             String password, // 해시 비밀번호
             Collection<? extends GrantedAuthority> authorities, // 권한

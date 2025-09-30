@@ -4,6 +4,7 @@ import com.example.k5_iot_springboot.common.enums.RoleType;
 import com.example.k5_iot_springboot.dto.G_Auth.request.SignInRequest;
 import com.example.k5_iot_springboot.dto.G_Auth.request.SignUpRequest;
 import com.example.k5_iot_springboot.dto.G_Auth.response.SignInResponse;
+import com.example.k5_iot_springboot.dto.J_Mail.MailRequest;
 import com.example.k5_iot_springboot.dto.ResponseDto;
 import com.example.k5_iot_springboot.entity.G_Role;
 import com.example.k5_iot_springboot.entity.G_User;
@@ -12,6 +13,7 @@ import com.example.k5_iot_springboot.repository.G_RoleRepository;
 import com.example.k5_iot_springboot.repository.G_UserRepository;
 import com.example.k5_iot_springboot.service.G_AuthService;
 import io.jsonwebtoken.Claims;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -106,5 +108,21 @@ public class G_AuthServiceImpl implements G_AuthService {
         );
 
         return ResponseDto.setSuccess("로그인 성공", response);
+    }
+
+    @Override
+    @Transactional
+    public void resetPassword(MailRequest.@Valid PasswordReset req) {
+        if (!req.newPassword().equals(req.confirmPassword()))
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+
+        G_User user = userRepository.findByEmail(req.email())
+                .orElseThrow(() -> new IllegalArgumentException("가입된 이메일이 아닙니다."));
+        String encoded = passwordEncoder.encode(req.newPassword());
+
+        user.changePassword(encoded);
+
+        userRepository.save(user);
+
     }
 }

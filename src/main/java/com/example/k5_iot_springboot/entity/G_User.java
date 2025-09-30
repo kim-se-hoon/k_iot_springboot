@@ -82,10 +82,10 @@ public class G_User extends BaseTimeEntity {
 
     /** 생성 편의 메서드 */
     @Builder
-    private G_User(String loginId, String password, String email, String nickname, Gender gender, Set<RoleType> roles) {
+    private G_User(String loginId, String password, String email, String nickname, Gender gender) {
         this.loginId = loginId;
         this.password = password;
-        this.email = email;
+         this.email = email;
         this.nickname = nickname;
         this.gender = gender;
         // userRoles는 서비스에서 부여

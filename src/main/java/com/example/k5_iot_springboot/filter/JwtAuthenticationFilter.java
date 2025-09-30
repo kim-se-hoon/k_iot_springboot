@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter { // OncePerRe
      * @param filterChain   다음 필터로 넘기기 위한 체인
      * */
     @Override // jwtauthenticationFilter가 매 요청마다 호출하는 핵심 메서드
-    protected void doFilterInternal( // http 요청/응답, 필터 체인 매개변수
+    protected void doFilterInternal ( // http 요청/응답, 필터 체인 매개변수
             HttpServletRequest request, // 현재 HTTP 요청 객체
             HttpServletResponse response, // 현재 HTTP 응답 객체
             FilterChain filterChain // 다음 필터로 넘기기 위한 체인

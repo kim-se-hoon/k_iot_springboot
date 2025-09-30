@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class G_Role {
-    /** 권한 명(PK) - Enum을 문자열로 저장*/
+    /** 권한 명(PK) - Enum을 문자열로 저장 */
     @Id @Enumerated(EnumType.STRING)
     @Column(name = "role_name", length = 30, nullable = false)
     private RoleType name;
@@ -22,5 +22,4 @@ public class G_Role {
     public G_Role(RoleType name) {
         this.name = name;
     }
-
 }
